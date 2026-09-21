@@ -1,9 +1,7 @@
 const canvas = document.getElementById('board')
 const ctx = canvas.getContext('2d')
 
-const START_OPTIONS = 3
-const RESULT_OPTIONS = 7
-const ROWS = 5
+let options = 7
 
 function resizeCanvas() {
   canvas.width = window.innerWidth
@@ -21,10 +19,10 @@ function drawBoard() {
 }
 
 function drawStartPoints() {
-  const spacing = canvas.width / (START_OPTIONS + 1)
+  const spacing = canvas.width / (options + 1)
   const y = 100
 
-  for (let i = 0; i < START_OPTIONS; i++) {
+  for (let i = 0; i < options; i++) {
     const x = spacing * (i + 1)
 
     ctx.beginPath()
@@ -38,13 +36,13 @@ function drawRows() {
   const startY = 180
   const rowSpacing = 90
 
-  const spacing = canvas.width / (START_OPTIONS + 1)
+  const spacing = canvas.width / (options + 1)
 
-  for (let row = 0; row < ROWS; row++) {
+  for (let row = 0; row < options; row++) {
     const y = startY + row * rowSpacing
 
-    for (let i = 0; i < START_OPTIONS + row; i++) {
-      const x = canvas.width / 2 + (i - (START_OPTIONS + row - 1) / 2) * spacing
+    for (let i = 0; i < options + row; i++) {
+      const x = canvas.width / 2 + (i - (options + row - 1) / 2) * spacing
 
       drawPin(x, y)
     }
@@ -60,14 +58,14 @@ function drawPin(x, y) {
 }
 
 function drawResults() {
-  const cellWidth = canvas.width / RESULT_OPTIONS
+  const cellWidth = canvas.width / options
   const cellHeight = 70
   const y = canvas.height - cellHeight
 
   ctx.strokeStyle = '#fff'
   ctx.lineWidth = 2
 
-  for (let i = 0; i < RESULT_OPTIONS; i++) {
+  for (let i = 0; i < options; i++) {
     const x = i * cellWidth
 
     ctx.strokeRect(x, y, cellWidth, cellHeight)
