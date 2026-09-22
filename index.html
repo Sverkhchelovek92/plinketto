@@ -7,7 +7,27 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <canvas id="board"></canvas>
+    <div class="app">
+      <aside class="sidebar">
+        <h1>PLINKETTO</h1>
+
+        <div class="settings">
+          <label for="options">Options</label>
+
+          <div class="number-control">
+            <button id="decreaseOptions">−</button>
+
+            <span id="optionsValue">7</span>
+
+            <button id="increaseOptions">+</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="board-container">
+        <canvas id="board"></canvas>
+      </main>
+    </div>
 
     <script type="module" src="main.js"></script>
   </body>
