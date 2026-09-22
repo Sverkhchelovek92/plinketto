@@ -3,7 +3,13 @@ const ctx = canvas.getContext('2d')
 
 let options = 7
 
+const optionsValue = document.getElementById('optionsValue')
+const decreaseOptions = document.getElementById('decreaseOptions')
+const increaseOptions = document.getElementById('increaseOptions')
+
 function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect()
+
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
 
@@ -13,71 +19,28 @@ function resizeCanvas() {
 function drawBoard() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  drawStartPoints()
-  drawRows()
-  drawResults()
+  ctx.fillStyle = '#151515'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+}
+function updateOptions() {
+  optionsValue.textContent = options
+
+  drawBoard()
 }
 
-function drawStartPoints() {
-  const spacing = canvas.width / (options + 1)
-  const y = 100
-
-  for (let i = 0; i < options; i++) {
-    const x = spacing * (i + 1)
-
-    ctx.beginPath()
-    ctx.arc(x, y, 8, 0, Math.PI * 2)
-    ctx.fillStyle = '#fff'
-    ctx.fill()
+decreaseOptions.addEventListener('click', () => {
+  if (options > 2) {
+    options--
+    updateOptions()
   }
-}
+})
 
-function drawRows() {
-  const startY = 180
-  const rowSpacing = 90
-
-  const spacing = canvas.width / (options + 1)
-
-  for (let row = 0; row < options; row++) {
-    const y = startY + row * rowSpacing
-
-    for (let i = 0; i < options + row; i++) {
-      const x = canvas.width / 2 + (i - (options + row - 1) / 2) * spacing
-
-      drawPin(x, y)
-    }
+increaseOptions.addEventListener('click', () => {
+  if (options < 15) {
+    options++
+    updateOptions()
   }
-}
-
-function drawPin(x, y) {
-  ctx.beginPath()
-  ctx.arc(x, y, 6, 0, Math.PI * 2)
-
-  ctx.fillStyle = '#fff'
-  ctx.fill()
-}
-
-function drawResults() {
-  const cellWidth = canvas.width / options
-  const cellHeight = 70
-  const y = canvas.height - cellHeight
-
-  ctx.strokeStyle = '#fff'
-  ctx.lineWidth = 2
-
-  for (let i = 0; i < options; i++) {
-    const x = i * cellWidth
-
-    ctx.strokeRect(x, y, cellWidth, cellHeight)
-
-    ctx.fillStyle = '#fff'
-    ctx.font = '24px Arial'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
-
-    ctx.fillText(i + 1, x + cellWidth / 2, y + cellHeight / 2)
-  }
-}
+})
 
 window.addEventListener('resize', resizeCanvas)
 
