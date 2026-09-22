@@ -1,6 +1,9 @@
 const canvas = document.getElementById('board')
 const ctx = canvas.getContext('2d')
 
+const MIN_OPTIONS = 4
+const MAX_OPTIONS = 18
+
 let options = 7
 
 const optionsValue = document.getElementById('optionsValue')
@@ -29,14 +32,14 @@ function updateOptions() {
 }
 
 decreaseOptions.addEventListener('click', () => {
-  if (options > 2) {
+  if (options > MIN_OPTIONS) {
     options--
     updateOptions()
   }
 })
 
 increaseOptions.addEventListener('click', () => {
-  if (options < 15) {
+  if (options < MAX_OPTIONS) {
     options++
     updateOptions()
   }
