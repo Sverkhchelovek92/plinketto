@@ -4,9 +4,13 @@ const ctx = canvas.getContext('2d')
 const MIN_OPTIONS = 4
 const MAX_OPTIONS = 18
 
-const DROP_STEPS = 20
+const MIN_HEIGHT = 8
+const MAX_HEIGHT = 20
+const HEIGHT_STEP = 2
 
 let options = 7
+
+let height = 20
 
 const optionsValue = document.getElementById('optionsValue')
 const decreaseOptions = document.getElementById('decreaseOptions')
@@ -147,7 +151,7 @@ increaseOptions.addEventListener('click', () => {
 function dropBall(startChoice) {
   let choice = startChoice
 
-  for (let i = 0; i < DROP_STEPS; i++) {
+  for (let i = 0; i < height; i++) {
     if (choice === 1) {
       choice += 0.5
     } else if (choice === options) {
@@ -165,3 +169,5 @@ function dropBall(startChoice) {
 window.addEventListener('resize', resizeCanvas)
 
 resizeCanvas()
+
+console.log('Result:', dropBall(3))
