@@ -4,6 +4,8 @@ const ctx = canvas.getContext('2d')
 const MIN_OPTIONS = 4
 const MAX_OPTIONS = 18
 
+const DROP_STEPS = 20
+
 let options = 7
 
 const optionsValue = document.getElementById('optionsValue')
@@ -141,6 +143,24 @@ increaseOptions.addEventListener('click', () => {
     updateOptions()
   }
 })
+
+function dropBall(startChoice) {
+  let choice = startChoice
+
+  for (let i = 0; i < DROP_STEPS; i++) {
+    if (choice === 1) {
+      choice += 0.5
+    } else if (choice === options) {
+      choice -= 0.5
+    } else {
+      choice += Math.random() < 0.5 ? -0.5 : 0.5
+    }
+
+    console.log(`Step ${i + 1}: ${choice}`)
+  }
+
+  return choice
+}
 
 window.addEventListener('resize', resizeCanvas)
 
