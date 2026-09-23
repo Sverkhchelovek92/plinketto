@@ -16,6 +16,10 @@ const optionsValue = document.getElementById('optionsValue')
 const decreaseOptions = document.getElementById('decreaseOptions')
 const increaseOptions = document.getElementById('increaseOptions')
 
+const heightValue = document.getElementById('heightValue')
+const decreaseHeight = document.getElementById('decreaseHeight')
+const increaseHeight = document.getElementById('increaseHeight')
+
 function resizeCanvas() {
   const rect = canvas.getBoundingClientRect()
 
@@ -147,6 +151,26 @@ increaseOptions.addEventListener('click', () => {
     updateOptions()
   }
 })
+
+decreaseHeight.addEventListener('click', () => {
+  if (height > MIN_HEIGHT) {
+    height -= HEIGHT_STEP
+    updateHeight()
+  }
+})
+
+increaseHeight.addEventListener('click', () => {
+  if (height < MAX_HEIGHT) {
+    height += HEIGHT_STEP
+    updateHeight()
+  }
+})
+
+function updateHeight() {
+  heightValue.textContent = height
+
+  drawBoard()
+}
 
 function dropBall(startChoice) {
   let choice = startChoice
