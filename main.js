@@ -12,6 +12,33 @@ let options = 7
 
 let height = 20
 
+function getBoardLayout() {
+  const centerX = canvas.width / 2
+
+  const boardWidth = Math.min(520, canvas.width - 80)
+
+  const left = centerX - boardWidth / 2
+  const right = centerX + boardWidth / 2
+
+  const startY = 60
+
+  const pinsTop = 150
+  const pinsBottom = canvas.height - 150
+
+  const rowSpacing = (pinsBottom - pinsTop) / (height - 1)
+
+  return {
+    centerX,
+    boardWidth,
+    left,
+    right,
+    startY,
+    pinsTop,
+    pinsBottom,
+    rowSpacing,
+  }
+}
+
 const optionsValue = document.getElementById('optionsValue')
 const decreaseOptions = document.getElementById('decreaseOptions')
 const increaseOptions = document.getElementById('increaseOptions')
@@ -98,7 +125,7 @@ function drawPins() {
 
 function drawPin(x, y) {
   ctx.beginPath()
-  ctx.arc(x, y, 7, 0, Math.PI * 2)
+  ctx.arc(x, y, 5, 0, Math.PI * 2)
 
   ctx.fillStyle = '#fff'
   ctx.fill()
