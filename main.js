@@ -59,38 +59,35 @@ function resizeCanvas() {
 function drawBoard() {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-  drawStartPositions()
-  drawPins()
-  drawResults()
+  const layout = getBoardLayout()
+
+  drawStartPositions(layout)
+  drawPins(layout)
+  drawResults(layout)
 }
 
-function drawStartPositions() {
-  const count = 7
+function drawStartPositions(layout) {
+  const buttonWidth = layout.boardWidth / options
+  const buttonHeight = 44
 
-  const centerX = canvas.width / 2
-  const y = 60
+  const y = layout.startY
 
-  const spacing = 70
-
-  for (let i = 0; i < count; i++) {
-    const x = centerX + (i - (count - 1) / 2) * spacing
-
-    ctx.beginPath()
-    ctx.arc(x, y, 18, 0, Math.PI * 2)
+  for (let i = 0; i < options; i++) {
+    const x = layout.left + i * buttonWidth
 
     ctx.fillStyle = '#222'
-    ctx.fill()
+    ctx.fillRect(x + 2, y, buttonWidth - 4, buttonHeight)
 
-    ctx.strokeStyle = '#777'
-    ctx.lineWidth = 2
-    ctx.stroke()
+    ctx.strokeStyle = '#666'
+    ctx.lineWidth = 1
+    ctx.strokeRect(x + 2, y, buttonWidth - 4, buttonHeight)
 
     ctx.fillStyle = '#fff'
     ctx.font = '14px Arial'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
 
-    ctx.fillText(i + 1, x, y)
+    ctx.fillText(i + 1, x + buttonWidth / 2, y + buttonHeight / 2)
   }
 }
 
