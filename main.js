@@ -91,29 +91,20 @@ function drawStartPositions(layout) {
   }
 }
 
-function drawPins() {
-  const rows = 7
+function drawPins(layout) {
+  for (let row = 0; row < height; row++) {
+    const y = layout.pinsTop + row * layout.rowSpacing
 
-  const centerX = canvas.width / 2
+    const pinCount = row % 2 === 0 ? options + 1 : options
 
-  const startY = 180
-  const endY = canvas.height - 140
+    const spacing = layout.boardWidth / options
 
-  const rowSpacing = (endY - startY) / (rows - 1)
+    const totalWidth = (pinCount - 1) * spacing
 
-  const pinSpacing = 55
-
-  for (let row = 0; row < rows; row++) {
-    const y = startY + row * rowSpacing
-
-    const pinCount = row % 2 === 0 ? 8 : 7
-
-    const totalWidth = (pinCount - 1) * pinSpacing
-
-    const startX = centerX - totalWidth / 2
+    const startX = layout.centerX - totalWidth / 2
 
     for (let i = 0; i < pinCount; i++) {
-      const x = startX + i * pinSpacing
+      const x = startX + i * spacing
 
       drawPin(x, y)
     }
