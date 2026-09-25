@@ -23,7 +23,12 @@ function getBoardLayout() {
   const startY = 60
 
   const pinsTop = 150
-  const pinsBottom = canvas.height - 150
+  const resultsHeight = 60
+  const resultsY = canvas.height - resultsHeight - 40
+
+  const resultsGap = 30
+
+  const pinsBottom = resultsY - resultsGap
 
   const rowSpacing = (pinsBottom - pinsTop) / (height - 1)
 
@@ -36,6 +41,8 @@ function getBoardLayout() {
     pinsTop,
     pinsBottom,
     rowSpacing,
+    resultsY,
+    resultsHeight,
   }
 }
 
@@ -119,31 +126,26 @@ function drawPin(x, y) {
   ctx.fill()
 }
 
-function drawResults() {
-  const count = 7
+function drawResults(layout) {
+  const cellWidth = layout.boardWidth / options
+  const cellHeight = layout.resultsHeight
 
-  const width = 70
-  const height = 60
+  const y = layout.resultsY
 
-  const totalWidth = count * width
+  for (let i = 0; i < options; i++) {
+    const x = layout.left + i * cellWidth
 
-  const startX = (canvas.width - totalWidth) / 2
-  const y = canvas.height - height - 40
+    ctx.strokeStyle = '#666'
+    ctx.lineWidth = 1
 
-  ctx.strokeStyle = '#777'
-  ctx.lineWidth = 2
-
-  for (let i = 0; i < count; i++) {
-    const x = startX + i * width
-
-    ctx.strokeRect(x, y, width, height)
+    ctx.strokeRect(x, y, cellWidth, cellHeight)
 
     ctx.fillStyle = '#fff'
-    ctx.font = '20px Arial'
+    ctx.font = '16px Arial'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
 
-    ctx.fillText(i + 1, x + width / 2, y + height / 2)
+    ctx.fillText(i + 1, x + cellWidth / 2, y + cellHeight / 2)
   }
 }
 
