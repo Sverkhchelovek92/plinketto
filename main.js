@@ -4,13 +4,13 @@ const ctx = canvas.getContext('2d')
 const MIN_OPTIONS = 4
 const MAX_OPTIONS = 18
 
-const MIN_HEIGHT = 8
-const MAX_HEIGHT = 20
+const MIN_HEIGHT = 7
+const MAX_HEIGHT = 19
 const HEIGHT_STEP = 2
 
 let options = 7
 
-let height = 20
+let height = 19
 
 function getBoardLayout() {
   const centerX = canvas.width / 2
