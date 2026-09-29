@@ -68,6 +68,7 @@ function drawBoard() {
 
   const layout = getBoardLayout()
 
+  drawBoardBackground(layout)
   drawStartPositions(layout)
   drawPins(layout)
   drawResults(layout)
@@ -147,6 +148,15 @@ function drawResults(layout) {
 
     ctx.fillText(i + 1, x + cellWidth / 2, y + cellHeight / 2)
   }
+}
+
+function drawBoardBackground(layout) {
+  const top = 30
+  const bottom = layout.resultsY + layout.resultsHeight + 30
+
+  ctx.fillStyle = '#201f1f'
+
+  ctx.fillRect(layout.left, top, layout.boardWidth, bottom - top)
 }
 
 function updateOptions() {
