@@ -12,6 +12,8 @@ let options = 7
 
 let height = 19
 
+let hoveredStart = null
+
 function getBoardLayout() {
   const centerX = canvas.width / 2
 
@@ -74,20 +76,58 @@ function drawBoard() {
   drawResults(layout)
 }
 
+canvas.addEventListener('mousemove', (event) => {
+  const rect = canvas.getBoundingClientRect()
+
+  const mouseX = (event.clientX - rect.left) * (canvas.width / rect.width)
+  const mouseY = (event.clientY - rect.top) * (canvas.height / rect.height)
+
+  const layout = getBoardLayout()
+
+  const buttonWidth = layout.boardWidth / options
+  const buttonHeight = 44
+  const y = layout.startY
+
+  let newHoveredStart = null
+
+  if (mouseY >= y && mouseY <= y + buttonHeight) {
+    for (let i = 0; i < options; i++) {
+      const x = layout.left + i * buttonWidth
+
+      if (mouseX >= x && mouseX <= x + buttonWidth) {
+        newHoveredStart = i
+        break
+      }
+    }
+  }
+
+  if (hoveredStart !== newHoveredStart) {
+    hoveredStart = newHoveredStart
+    drawBoard()
+  }
+})
+
+canvas.addEventListener('mouseleave', () => {
+  if (hoveredStart !== null) {
+    hoveredStart = null
+    drawBoard()
+  }
+})
+
 function drawStartPositions(layout) {
   const buttonWidth = layout.boardWidth / options
   const buttonHeight = 44
-
   const y = layout.startY
 
   for (let i = 0; i < options; i++) {
     const x = layout.left + i * buttonWidth
+    const isHovered = hoveredStart === i
 
-    ctx.fillStyle = '#222'
+    ctx.fillStyle = isHovered ? '#444' : '#222'
     ctx.fillRect(x + 2, y, buttonWidth - 4, buttonHeight)
 
-    ctx.strokeStyle = '#666'
-    ctx.lineWidth = 1
+    ctx.strokeStyle = isHovered ? '#fff' : '#666'
+    ctx.lineWidth = isHovered ? 2 : 1
     ctx.strokeRect(x + 2, y, buttonWidth - 4, buttonHeight)
 
     ctx.fillStyle = '#fff'
