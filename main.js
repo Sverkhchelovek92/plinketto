@@ -267,6 +267,17 @@ function getBallX(choice, layout) {
   return layout.left + (choice - 0.5) * spacing
 }
 
+function getBallY(step, layout) {
+  return layout.pinsTop + step * layout.rowSpacing
+}
+
+function getBallPosition(choice, step, layout) {
+  return {
+    x: getBallX(choice, layout),
+    y: getBallY(step, layout),
+  }
+}
+
 window.addEventListener('resize', resizeCanvas)
 
 resizeCanvas()
