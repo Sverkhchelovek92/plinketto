@@ -242,6 +242,8 @@ function updateHeight() {
 function dropBall(startChoice) {
   let choice = startChoice
 
+  const path = [choice]
+
   for (let i = 0; i < height; i++) {
     if (choice === 1) {
       choice += 0.5
@@ -251,14 +253,16 @@ function dropBall(startChoice) {
       choice += Math.random() < 0.5 ? -0.5 : 0.5
     }
 
+    path.push(choice)
+
     console.log(`Step ${i + 1}: ${choice}`)
   }
 
-  return choice
+  return path
 }
 
 window.addEventListener('resize', resizeCanvas)
 
 resizeCanvas()
 
-console.log('Result:', dropBall(3))
+console.log('Path:', dropBall(3))
