@@ -261,6 +261,12 @@ function dropBall(startChoice) {
   return path
 }
 
+function getBallX(choice, layout) {
+  const spacing = layout.boardWidth / options
+
+  return layout.left + (choice - 0.5) * spacing
+}
+
 window.addEventListener('resize', resizeCanvas)
 
 resizeCanvas()
