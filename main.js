@@ -256,7 +256,7 @@ function dropBall(startChoice) {
 
   const path = [choice]
 
-  for (let i = 0; i < height; i++) {
+  for (let i = 0; i < height - 1; i++) {
     if (choice === 1) {
       choice += 0.5
     } else if (choice === options) {
@@ -315,3 +315,5 @@ window.addEventListener('resize', resizeCanvas)
 resizeCanvas()
 
 console.log('Path:', dropBall(3))
+
+animateBall(dropBall(3))
