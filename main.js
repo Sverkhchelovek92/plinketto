@@ -74,6 +74,8 @@ function drawBoard() {
   drawStartPositions(layout)
   drawPins(layout)
   drawResults(layout)
+
+  drawBall(3, 0, layout)
 }
 
 canvas.addEventListener('mousemove', (event) => {
@@ -197,6 +199,16 @@ function drawBoardBackground(layout) {
   ctx.fillStyle = '#201f1f'
 
   ctx.fillRect(layout.left, top, layout.boardWidth, bottom - top)
+}
+
+function drawBall(choice, step, layout) {
+  const position = getBallPosition(choice, step, layout)
+
+  ctx.beginPath()
+  ctx.arc(position.x, position.y, 7, 0, Math.PI * 2)
+
+  ctx.fillStyle = '#c70d0d'
+  ctx.fill()
 }
 
 function updateOptions() {
