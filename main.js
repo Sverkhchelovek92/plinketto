@@ -75,7 +75,7 @@ function drawBoard() {
   drawPins(layout)
   drawResults(layout)
 
-  drawBall(3, 0, layout)
+  // drawBall(3, 0, layout)
 }
 
 canvas.addEventListener('mousemove', (event) => {
@@ -271,6 +271,26 @@ function dropBall(startChoice) {
   }
 
   return path
+}
+
+function animateBall(path) {
+  let step = 0
+
+  function animate() {
+    drawBoard()
+
+    const layout = getBoardLayout()
+
+    drawBall(path[step], step, layout)
+
+    step++
+
+    if (step < path.length) {
+      requestAnimationFrame(animate)
+    }
+  }
+
+  animate()
 }
 
 function getBallX(choice, layout) {
