@@ -78,6 +78,37 @@ function drawBoard() {
   // drawBall(3, 0, layout)
 }
 
+canvas.addEventListener('click', (event) => {
+  const rect = canvas.getBoundingClientRect()
+
+  const mouseX = (event.clientX - rect.left) * (canvas.width / rect.width)
+
+  const mouseY = (event.clientY - rect.top) * (canvas.height / rect.height)
+
+  const layout = getBoardLayout()
+
+  const buttonWidth = layout.boardWidth / options
+  const buttonHeight = 44
+  const y = layout.startY
+
+  if (mouseY < y || mouseY > y + buttonHeight) {
+    return
+  }
+
+  for (let i = 0; i < options; i++) {
+    const x = layout.left + i * buttonWidth
+
+    if (mouseX >= x && mouseX <= x + buttonWidth) {
+      const startChoice = i + 1
+      const path = dropBall(startChoice)
+
+      animateBall(path)
+
+      break
+    }
+  }
+})
+
 canvas.addEventListener('mousemove', (event) => {
   const rect = canvas.getBoundingClientRect()
 
