@@ -275,17 +275,34 @@ function dropBall(startChoice) {
 
 function animateBall(path) {
   let step = 0
+  let progress = 0
+
+  const framesPerStep = 12
 
   function animate() {
     drawBoard()
 
     const layout = getBoardLayout()
 
-    drawBall(path[step], step, layout)
+    const currentChoice = path[step]
+    const nextChoice = path[step + 1]
 
-    step++
+    const t = progress / framesPerStep
 
-    if (step < path.length) {
+    const choice = currentChoice + (nextChoice - currentChoice) * t
+
+    const currentStep = step + t
+
+    drawBall(choice, currentStep, layout)
+
+    progress++
+
+    if (progress > framesPerStep) {
+      progress = 0
+      step++
+    }
+
+    if (step < path.length - 1) {
       requestAnimationFrame(animate)
     }
   }
