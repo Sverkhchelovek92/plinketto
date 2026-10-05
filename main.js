@@ -13,6 +13,7 @@ let options = 7
 let height = 19
 
 let hoveredStart = null
+let isDropping = false
 
 function getBoardLayout() {
   const centerX = canvas.width / 2
@@ -79,6 +80,9 @@ function drawBoard() {
 }
 
 canvas.addEventListener('click', (event) => {
+  if (isDropping) {
+    return
+  }
   const rect = canvas.getBoundingClientRect()
 
   const mouseX = (event.clientX - rect.left) * (canvas.width / rect.width)
@@ -305,6 +309,7 @@ function dropBall(startChoice) {
 }
 
 function animateBall(path) {
+  isDropping = true
   let step = 0
   let progress = 0
 
@@ -335,6 +340,8 @@ function animateBall(path) {
 
     if (step < path.length - 1) {
       requestAnimationFrame(animate)
+    } else {
+      isDropping = false
     }
   }
 
