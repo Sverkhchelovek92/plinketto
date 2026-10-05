@@ -15,6 +15,8 @@ let height = 19
 let hoveredStart = null
 let isDropping = false
 
+let result = null
+
 function getBoardLayout() {
   const centerX = canvas.width / 2
 
@@ -104,6 +106,8 @@ canvas.addEventListener('click', (event) => {
 
     if (mouseX >= x && mouseX <= x + buttonWidth) {
       const startChoice = i + 1
+
+      result = null
       const path = dropBall(startChoice)
 
       animateBall(path)
@@ -224,6 +228,10 @@ function drawResults(layout) {
     ctx.textBaseline = 'middle'
 
     ctx.fillText(i + 1, x + cellWidth / 2, y + cellHeight / 2)
+
+    if (result === i + 1) {
+      console.log(result)
+    }
   }
 }
 
@@ -341,7 +349,10 @@ function animateBall(path) {
     if (step < path.length - 1) {
       requestAnimationFrame(animate)
     } else {
+      result = path[path.length - 1]
       isDropping = false
+
+      drawBoard()
     }
   }
 
