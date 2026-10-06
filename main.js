@@ -238,6 +238,15 @@ function drawResults(layout) {
       console.log(result)
     }
   }
+
+  if (result !== null) {
+    ctx.fillStyle = '#fff'
+    ctx.font = '20px Arial'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'bottom'
+
+    ctx.fillText(`WINNER: ${result}`, layout.centerX, y + 87)
+  }
 }
 
 function drawBoardBackground(layout) {
