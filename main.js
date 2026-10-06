@@ -220,6 +220,11 @@ function drawResults(layout) {
     ctx.strokeStyle = '#666'
     ctx.lineWidth = 1
 
+    if (result === i + 1) {
+      ctx.fillStyle = '#444'
+      ctx.fillRect(x, y, cellWidth, cellHeight)
+    }
+
     ctx.strokeRect(x, y, cellWidth, cellHeight)
 
     ctx.fillStyle = '#fff'
